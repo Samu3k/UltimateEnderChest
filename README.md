@@ -1,83 +1,80 @@
+![UltimateEnderChest — 54 slots. Anywhere.](assets/banner.png)
+
 # UltimateEnderChest
 
-**Your Ender Chest, anywhere — with twice the space.**
+**A Minecraft plugin for Paper that lets you open your own Ender Chest anywhere — with 54 slots instead of 27.**
 
-UltimateEnderChest is a lightweight plugin for **Paper 26.2** that opens a personal **54-slot Ender Chest** with `/enderchest` or `/ec`. The command takes you straight to a six-row inventory, just like a double chest: no menus, buttons, or physical Ender Chest required.
+Type **`/enderchest`** or **`/ec`** to open it instantly. You get six rows of storage, just like a double chest, without needing an Ender Chest block nearby.
 
-## Features
+Your items stay private, your existing vanilla items remain available, and your storage is saved between server restarts.
 
-- **54 slots:** six rows of nine, twice the vanilla capacity.
-- **Access anywhere:** use `/enderchest` or its short alias `/ec`.
-- **Private storage:** each player can access only their own chest.
-- **Existing items preserved:** the first 27 slots are your original vanilla Ender Chest.
-- **Physical chest support:** opening an Ender Chest block also opens the same 54-slot inventory.
-- **Persistent storage:** extra slots are stored in Minecraft player data, with no external database.
-- **Available to everyone by default:** no operator status required.
-- **No client mods or additional plugins required.**
+**[Download the plugin](https://github.com/Samu3k/UltimateEnderChest/releases/latest)** · **[Report an issue](https://github.com/Samu3k/UltimateEnderChest/issues)**
 
-## Requirements
+## What you get
 
-| Requirement | Supported version |
+- **Twice the space:** 54 slots, arranged in six rows of nine.
+- **Access anywhere:** one command takes you straight to your chest.
+- **Your own storage:** every player has a separate inventory.
+- **Your existing items:** the original 27 slots become the first three rows.
+- **The same chest everywhere:** opening a physical Ender Chest also shows all 54 slots.
+- **Simple setup:** no configuration, extra plugins, or client mods required.
+
+## Install in three steps
+
+**Requires Paper 26.2 and Java 25.**
+
+1. Stop your server.
+2. Put `UltimateEnderChest-1.1.0.jar` in the server's `plugins` folder.
+3. Start the server and type `/enderchest` in game.
+
+The command is available to everyone by default, including players without operator status.
+
+## Technical details
+
+### Compatibility
+
+| Requirement | Version |
 | --- | --- |
 | Server | Paper 26.2 |
 | Java | 25 |
-| Client mods | None |
 | Plugin dependencies | None |
+| Client mods | None |
 
-Other server versions and Folia are not currently tested or supported.
+Other Minecraft versions and Folia are not currently tested or supported.
 
-## Installation
+### Commands and permission
 
-1. Download `UltimateEnderChest-1.1.0.jar` from the repository's **Releases** section once a release is available, or build it from source below.
-2. Stop your server.
-3. Place the JAR in the server's `plugins` folder.
-4. Start the server and run `/enderchest` in game.
+| Command | Action |
+| --- | --- |
+| `/enderchest` | Open your own 54-slot Ender Chest. |
+| `/ec` | Short alias for `/enderchest`. |
+| `/ultimateenderchest:enderchest` | Use this plugin explicitly if another plugin handles the same command. |
 
-No configuration is required.
+Commands do not accept player names or other arguments.
+
+**Permission:** `ultimateenderchest.use` — enabled for everyone by default. Deny it through your permission manager to restrict command access. Opening a physical Ender Chest remains available through normal Minecraft interaction.
+
+### Storage and backups
+
+The first 27 slots remain in the vanilla Ender Chest. The additional 27 slots are serialized with Paper's item API and stored in the player's persistent data container, under `ultimateenderchest:extra_slots_v1`. No external database is needed.
+
+Changes are saved when the inventory closes, the player disconnects, or the plugin shuts down. Clicks and drags also trigger a save after 10 server ticks, approximately half a second at 20 TPS.
+
+Back up your world's **player data**, not just the `plugins` folder. An abrupt crash can lose changes that have not yet been saved.
 
 ### Upgrading from EnderChestPlus
 
-1. Stop the server and back up your world, including player data.
-2. Remove the old `EnderChestPlus-1.0.0.jar` from `plugins`.
-3. Add `UltimateEnderChest-1.1.0.jar` and start the server.
+Stop the server, back up your world and player data, remove `EnderChestPlus-1.0.0.jar`, and install the new JAR. **Do not run both plugins together.**
 
-**Do not run both plugins at the same time.** UltimateEnderChest reads the original extra-slot data and migrates it automatically when the chest is saved. Your existing items remain available in all 54 slots.
+Existing extra-slot items are read automatically and migrated when the chest is saved. Update any configured permissions and command aliases to the new plugin name. After migration, returning to EnderChestPlus requires a backup because the old plugin cannot read the new storage key.
 
-If you configured permissions or command aliases for the previous plugin, update them to the new names shown below. After migration, use a backup if you need to return to the old plugin: EnderChestPlus cannot read the new extra-slot key.
+### Uninstalling
 
-## Commands
+Without this plugin, players can access only the original 27 slots. Extra-slot items remain in player data and become accessible again when UltimateEnderChest is reinstalled. Retrieve items from the extra rows before permanently uninstalling.
 
-| Command | Description |
-| --- | --- |
-| `/enderchest` | Open your personal 54-slot Ender Chest. |
-| `/ec` | Short alias for `/enderchest`. |
-| `/ultimateenderchest:enderchest` | Explicit command if another plugin uses the same name. |
+### Command conflicts
 
-These commands open only your own inventory and do not accept player names or other arguments.
-
-## Permissions
-
-| Permission | Description | Default |
-| --- | --- | --- |
-| `ultimateenderchest.use` | Open your own Ender Chest using the command. | Everyone |
-
-You can deny this permission through your permission manager to restrict remote access. Opening a physical Ender Chest remains available through normal Minecraft interaction.
-
-## Storage and backups
-
-The first 27 slots remain in the vanilla Ender Chest. The additional 27 slots are serialized with Paper's item API and stored in the player's persistent data container, under `ultimateenderchest:extra_slots_v1`.
-
-Changes are saved when the inventory closes, when the player disconnects, and when the plugin shuts down. Click and drag changes also trigger a save after 10 server ticks, approximately half a second at 20 TPS.
-
-Include your world's **player data** in backups; backing up only the `plugins` folder will not back up chest contents. An abrupt server crash can lose changes that have not yet been saved.
-
-### Removing the plugin
-
-Removing UltimateEnderChest restores access to the normal 27-slot Ender Chest. The additional slots remain in player data and become accessible again when you reinstall UltimateEnderChest. Retrieve items from the extra rows before permanently uninstalling it.
-
-## Command conflicts
-
-If another plugin already handles `/enderchest` or `/ec`, use `/ultimateenderchest:enderchest`. To make the shorter commands point to this plugin, merge the following aliases into the server's `commands.yml`, then restart:
+If `/enderchest` or `/ec` opens another plugin's inventory, use `/ultimateenderchest:enderchest`. To assign the shorter commands to UltimateEnderChest, merge these aliases into the server's `commands.yml` and restart:
 
 ```yaml
 aliases:
@@ -87,34 +84,22 @@ aliases:
     - "ultimateenderchest:enderchest $1-"
 ```
 
-Avoid running multiple plugins that replace the Ender Chest interface or modify its contents while it is open. Compatibility with third-party chest and protection plugins must be checked on your server. UltimateEnderChest respects native inventory-opening events cancelled before its handler runs.
+Avoid running multiple plugins that replace Ender Chest inventories or modify their contents while open. Third-party chest and protection plugin compatibility needs to be checked on your server. Native inventory-opening events cancelled before this plugin's handler runs are respected.
 
-## Build from source
+### Building and testing
 
-Install **JDK 25** and **Maven 3.9+**, then run this command in the repository root:
+With **JDK 25** and **Maven 3.9+**, run:
 
 ```sh
 mvn clean package
 ```
 
-The compiled plugin will be available at:
+The plugin is created at `target/UltimateEnderChest-1.1.0.jar`. Paper and the test framework are not bundled into the JAR.
 
-```text
-target/UltimateEnderChest-1.1.0.jar
-```
+**12 automated tests passed**, covering inventory size, commands, vanilla items, player isolation, serialization, saving, and migration from EnderChestPlus. Run them separately with `mvn test`.
 
-Paper and the test framework are build-time dependencies and are not bundled into the plugin JAR.
+Tests use MockBukkit for Paper 26.2. The original EnderChestPlus version was reported working on a real Paper server; the renamed version's Minecraft client interaction and Paper's player-data disk writes still need an in-game check after upgrading.
 
-## Testing
+### Getting help
 
-The project includes automated tests using MockBukkit for Paper 26.2, covering inventory size, command access, vanilla item preservation, player isolation, serialization, saving, and migration from EnderChestPlus.
-
-```sh
-mvn test
-```
-
-The original EnderChestPlus version was reported working on a real Paper server. Automated tests simulate server behavior; the renamed version's full Minecraft client interaction and Paper's player-data disk writes still need an in-game check after upgrading.
-
-## Reporting an issue
-
-Include your Paper version, Java version, plugin version, relevant server logs, and steps to reproduce the problem. Mention any other plugins that handle Ender Chests or the same commands. Do not include private player data or credentials.
+When reporting an issue, include your Paper, Java, and plugin versions, relevant logs, and steps to reproduce it. Mention any plugins that manage Ender Chests or the same commands. Remove credentials and private player data from attachments.
