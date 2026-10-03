@@ -1,0 +1,16 @@
+name: UltimateEnderChest
+version: 1.1.0
+main: it.marco.ultimateenderchest.UltimateEnderChest
+api-version: '26.2'
+description: A personal 54-slot Ender Chest, accessible anywhere.
+commands:
+  enderchest:
+    description: Open your personal 54-slot Ender Chest.
+    usage: /enderchest
+    aliases: [ec]
+    permission: ultimateenderchest.use
+    permission-message: You do not have permission to use this command.
+permissions:
+  ultimateenderchest.use:
+    description: Allows opening your own Ender Chest with the command.
+    default: true
